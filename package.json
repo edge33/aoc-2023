@@ -4,7 +4,7 @@
   "description": "Boilerplate workspace for advent of code puzzle",
   "main": "index.ts",
   "scripts": {
-    "dev": "bun src/index.ts",
+    "dev": "bun --watch src/index.ts",
     "build": "rm -rf dist && tsc",
     "test": "vitest",
     "start": "node dist/index.js",
