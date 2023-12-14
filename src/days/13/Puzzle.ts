@@ -54,7 +54,6 @@ const findReflectingColumn = (grid: string[][], bestDifference = false) => {
   return null;
 };
 
-
 // this is to be used with the brute force solution
 const findReflectingColumn_ = (grid: string[][], exclude = -1) => {
   const length = grid[0].length;
@@ -72,7 +71,6 @@ const findReflectingColumn_ = (grid: string[][], exclude = -1) => {
       const rightHalf = sliced.slice(half.length).reverse();
 
       if (half.join('') === rightHalf.join('')) {
-
         if (exclude === sliced.length / 2 + start) {
           continue;
         }
@@ -92,7 +90,6 @@ const findReflectingColumn_ = (grid: string[][], exclude = -1) => {
           return sliced.length / 2 + start;
         }
       }
-
     }
 
     currentLength = currentLength - 2;
@@ -141,12 +138,9 @@ const second = (input: string) => {
     reflection = findReflectingColumn(flipGrid(grid), true);
     return acc + reflection * 100;
 
-
-
-
     /**
      * code for the brute force solution
-    */
+     */
 
     /*
 
@@ -182,7 +176,6 @@ const second = (input: string) => {
     
     return acc;
   */
-
   }, 0);
 };
 
