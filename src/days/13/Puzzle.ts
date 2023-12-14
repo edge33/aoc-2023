@@ -54,6 +54,52 @@ const findReflectingColumn = (grid: string[][], bestDifference = false) => {
   return null;
 };
 
+
+// this is to be used with the brute force solution
+const findReflectingColumn_ = (grid: string[][], exclude = -1) => {
+  const length = grid[0].length;
+  let currentLength = length % 2 === 0 ? length : length - 1;
+
+  while (currentLength > 1) {
+    for (const [start, end] of [
+      [0, currentLength],
+      [length - currentLength, length],
+    ]) {
+      const row = grid[0];
+      const sliced = row.slice(start, end);
+
+      const half = sliced.slice(0, sliced.length / 2);
+      const rightHalf = sliced.slice(half.length).reverse();
+
+      if (half.join('') === rightHalf.join('')) {
+
+        if (exclude === sliced.length / 2 + start) {
+          continue;
+        }
+
+        let valid = true;
+        for (const row of grid.slice(1)) {
+          const sliced = row.slice(start, end);
+
+          const half = sliced.slice(0, sliced.length / 2);
+          const rightHalf = sliced.slice(half.length).reverse();
+          if (half.join('') !== rightHalf.join('')) {
+            valid = false;
+            break;
+          }
+        }
+        if (valid) {
+          return sliced.length / 2 + start;
+        }
+      }
+
+    }
+
+    currentLength = currentLength - 2;
+  }
+  return null;
+};
+
 const flipGrid = (grid: string[][]) => {
   const flipped = new Array(grid[0].length);
   let i = 0;
@@ -92,10 +138,51 @@ const second = (input: string) => {
       return acc + reflection;
     }
 
-    const flipped = flipGrid(grid);
-    reflection = findReflectingColumn(flipped, true);
-
+    reflection = findReflectingColumn(flipGrid(grid), true);
     return acc + reflection * 100;
+
+
+
+
+    /**
+     * code for the brute force solution
+    */
+
+    /*
+
+    let reflection = findReflectingColumn_(grid);
+    let horizontalReflection;
+    if (!reflection) {
+      horizontalReflection = findReflectingColumn_(flipGrid(grid));
+    }
+    for (let i = 0; i < grid.length; i++) {
+      for (let j = 0; j < grid[i].length; j++) {
+        const cloned = grid.slice().map(l => l.slice());
+        cloned[i][j] = cloned[i][j] === '#' ? '.' : '#';
+        const newReflection = findReflectingColumn_(cloned, reflection);
+        if (newReflection) {
+          return acc + newReflection;
+        }
+      }
+    }
+
+    for (let i = 0; i < grid.length; i++) {
+      for (let j = 0; j < grid[i].length; j++) {
+        const cloned = grid.slice().map(l => l.slice());
+        cloned[i][j] = cloned[i][j] === '#' ? '.' : '#';
+        const flipped = flipGrid(cloned);
+
+        const newReflection = findReflectingColumn_(flipped, horizontalReflection);
+        if (newReflection) {
+          return acc + newReflection * 100;
+        }
+      }
+    }
+
+    
+    return acc;
+  */
+
   }, 0);
 };
 
