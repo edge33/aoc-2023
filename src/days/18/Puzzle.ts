@@ -61,6 +61,6 @@ const second = (input: string) => {
   return i + boundaryPoints;
 };
 
-const expectedSecondSolution = 'solution 2';
+const expectedSecondSolution = 201398068194715;
 
 export { first, expectedFirstSolution, second, expectedSecondSolution };
