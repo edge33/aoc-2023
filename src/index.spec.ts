@@ -26,7 +26,7 @@ for (const day of dirs) {
       expectedSecondSolution,
     }: Puzzle = await import(`./days/${puzzleName}/Puzzle.js`);
 
-    assert.equal(first(input), expectedFirstSolution);
-    assert.equal(second(input), expectedSecondSolution);
+    assert.equal(await first(input), expectedFirstSolution);
+    assert.equal(await second(input), expectedSecondSolution);
   });
 }

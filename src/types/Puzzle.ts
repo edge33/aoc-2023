@@ -1,7 +1,7 @@
 type Puzzle = {
-  first: (input: string) => string;
+  first: (input: string) => Promise<string>;
   expectedFirstSolution: string;
-  second: (input: string) => string;
+  second: (input: string) => Promise<string>;
   expectedSecondSolution: string;
 };
 

@@ -25,11 +25,11 @@ console.log(`Solving Day #${args[0]}`);
   );
 
   let start = performance.now();
-  console.log(first(input));
+  console.log(await first(input));
   let end = performance.now();
   console.log(`Execution time: ${end - start} ms`);
   start = performance.now();
-  console.log(second(input));
+  console.log(await second(input));
   end = performance.now();
   console.log(`Execution time: ${end - start} ms`);
 })();
